@@ -11,11 +11,24 @@ import GenreChart from './genreChart'
 import DecadeChart from './decadeChart'
 import PersonalityCard from './PersonalityCard'
 import { getPersonality } from '../lib/personalities'
+import ShareCard from './ShareCard'
 
+const RANGE_LABELS: Record<TimeRange, string> = {
+    short_term: 'Last 4 weeks',
+    medium_term: 'Last 6 months',
+    long_term: 'Last 12 months',
+  }
 
 export default function Dashboard() {
   const [range, setRange] = useState<TimeRange>('medium_term')
   const { artists, tracks, status, error, retry } = useTopData(range)
+  const personality = getPersonality({
+    diversity: genreDiversity(artists),
+    averageYear: averageReleaseYear(tracks),
+    loyalty: loyalty(tracks),
+    decadeCount: byDecade(tracks).length,
+    artistCount: artists.length,
+  })
 
   if (status === 'done') {
     console.log('diversity', genreDiversity(artists))
@@ -66,6 +79,8 @@ export default function Dashboard() {
           <TrackList tracks={tracks} />
           <GenreChart artists={artists} />
           <DecadeChart tracks={tracks} />
+          <ShareCard personality={personality} artists={artists} 
+          tracks={tracks} rangeLabel={RANGE_LABELS[range]} />
         </div>
       )}
     </div>
