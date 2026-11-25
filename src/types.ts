@@ -5,7 +5,7 @@ export interface Artist {
   id: string
   name: string
   images: { url: string }[]
-  genres: string[]
+  genres: string[] | undefined
   external_urls: { spotify: string }
 }
 

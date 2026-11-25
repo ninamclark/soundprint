@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getTopArtists, getTopTracks } from '../api/spotify'
 import type { Artist, TimeRange, Track } from '../types'
+import { addGenres } from '../api/lastfm'
 
 type Status = 'loading' | 'done' | 'error'
 
@@ -25,7 +26,9 @@ export function useTopData(range: TimeRange) {
           getTopTracks(range),
         ])
         if (cancelled) return
-        setArtists(artistData)
+        const withGenres = await addGenres(artistData)
+        if (cancelled) return
+        setArtists(withGenres)
         setTracks(trackData)
         setStatus('done')
       } catch (err) {
