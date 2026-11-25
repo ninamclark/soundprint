@@ -53,7 +53,7 @@ export default function Dashboard() {
       )}
 
       {status === 'done' && (
-        <div>
+        <div className="mt-8 space-y-10">
             <PersonalityCard
                 personality={getPersonality({
                 diversity: genreDiversity(artists),
@@ -63,7 +63,7 @@ export default function Dashboard() {
                 artistCount: artists.length,
                 })}
             />
-        
+            <div className="grid grid-cols-1 gap-8 border-y border-white/10 py-8 sm:grid-cols-3">
             {availableStats(false).map(function (stat) {
             const result = stat.compute({ artists, tracks, olderArtists: [] })
             return (                
@@ -75,6 +75,7 @@ export default function Dashboard() {
                 />
             )
             })}
+            </div>
           <ArtistList artists={artists} />
           <TrackList tracks={tracks} />
           <GenreChart artists={artists} />

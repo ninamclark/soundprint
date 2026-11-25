@@ -13,12 +13,13 @@ const options: { range: TimeRange; label: string }[] = [
 
 export default function TimeRangeToggle({ value, onChange }: Props) {
   return (
-    <div>
+    <div className="flex gap-2">
       {options.map((option) => (
         <button
           key={option.range}
           aria-pressed={value === option.range}
           onClick={() => onChange(option.range)}
+          className="rounded-full border border-white/20 px-4 py-1 text-sm aria-pressed:border-transparent aria-pressed:bg-[var(--accent)] aria-pressed:text-black"
         >
           {option.label}
         </button>

@@ -48,7 +48,7 @@ export default function App() {
     // still checking if the user is logged in
     if (loading) {
       return (
-        <main>
+        <main className="mx-auto max-w-5xl px-6 py-10">
           <p>Loading...</p>
         </main>
       )
@@ -61,21 +61,25 @@ export default function App() {
     }
   
     return (
-      <main>
-        <h1>soundprint</h1>
+      <main className="mx-auto max-w-5xl px-6 py-10">
+        <h1 className="text-4xl font-semibold tracking-tight">soundprint</h1>
   
         {error && <p role="alert">{error}</p>}
   
         {me && (
           <div>
+            <div className="mt-6 mb-8 flex items-center gap-4">
             {me.images[0] && (
               <img
                 src={me.images[0].url}
                 alt={'Profile picture of ' + name}
+                className="h-12 w-12 rounded-full object-cover"
               />
             )}
             <p>Hi, {name}</p>
-            <button onClick={handleLogout}>Log out</button>
+            <button onClick={handleLogout}
+            className="ml-auto rounded-full border border-white/20 px-4 py-1 text-sm hover:bg-white/10">Log out</button>
+            </div>
             <Dashboard />
           </div>
         )}
@@ -83,7 +87,9 @@ export default function App() {
         {!me && (
           <div>
             <p>See your top artists, tracks, and genres as simple charts.</p>
-            <button onClick={() => login()}>Log in with Spotify</button>
+            <button onClick={() => login()}
+              className="rounded-full bg-[var(--accent)] px-6 py-2 font-medium text-black"
+              >Log in with Spotify</button>
             <button>Try the demo</button>
           </div>
         )}
