@@ -28,17 +28,33 @@ export default function GenreChart({ artists }: Props) {
 
   return (
     <div>
-      <h2>Top genres</h2>
+      <h2 className = "text-2xl font-semibold tracking-tight">Top genres</h2>
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data} layout="vertical">
-          <XAxis type="number" allowDecimals={false} />
-          <YAxis type="category" dataKey="genre" width={110} />
-          <Tooltip />
-          <Bar dataKey="count">
-            <LabelList dataKey="count" position="right" />
-          </Bar>
+        <BarChart data={data} layout="vertical" margin={{ right: 24 }}>
+            <XAxis type="number" allowDecimals={false} hide />
+            <YAxis
+            type="category"
+            dataKey="genre"
+            width={110}
+            tick={{ fill: '#a8a29e', fontSize: 14 }}
+            axisLine={false}
+            tickLine={false}
+            />
+            <Tooltip
+            cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }}
+            contentStyle={{
+                background: '#1c1c1f',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: 8,
+            }}
+            labelStyle={{ color: '#f5f5f4' }}
+            itemStyle={{ color: '#f5f5f4' }}
+            />
+            <Bar dataKey="count" fill="#8fbf9f" radius={[0, 6, 6, 0]}>
+            <LabelList dataKey="count" position="right" fill="#f5f5f4" fontSize={14} />
+            </Bar>
         </BarChart>
-      </ResponsiveContainer>
+        </ResponsiveContainer>
     </div>
   )
 }
