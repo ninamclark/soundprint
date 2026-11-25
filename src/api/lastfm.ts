@@ -4,8 +4,8 @@ const API_URL = 'https://ws.audioscrobbler.com/2.0/'
 const API_KEY = import.meta.env.VITE_LASTFM_API_KEY
 
 // how many tags to keep per artist, and how popular a tag has to be (0-100) to count
-const MAX_TAGS = 3
-const MIN_TAG_COUNT = 50
+const MAX_TAGS = 2
+const MIN_TAG_COUNT = 70
 
 // the parts of last.fm's response that we use
 interface LastfmTag {

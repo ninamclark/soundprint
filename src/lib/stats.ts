@@ -39,7 +39,7 @@ export function genreCounts(artists: Artist[]): GenreCount[] {
   return result
 }
 
-// ---------- genre diversity ----------
+// genre diversity
 
 // 0 = all one genre, 100 = spread perfectly evenly
 // shannon entropy of the genre shares, divided by its max so it's 0-100
@@ -181,11 +181,7 @@ export interface ArtistMovement {
 
 // compares a recent list (like last 4 weeks) to an older one (like last 12 months)
 export function artistMovement(recent: Artist[], older: Artist[]): ArtistMovement[] {
-  // TODO: make a named constant for how many places counts as a real move (like 3)
-  // TODO: for each recent artist, find its position in the older list
-  // TODO: not in the older list at all -> 'new'
-  // TODO: otherwise change = older position - recent position (positive means it climbed)
-  // TODO: change bigger than the constant -> 'rising', smaller than minus the constant -> 'falling', else 'steady'
+  // skip for now
   return []
 }
 

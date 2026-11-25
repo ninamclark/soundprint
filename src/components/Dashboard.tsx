@@ -7,6 +7,10 @@ import TrackList from './TrackList'
 import { averageReleaseYear, byDecade, diversityLabel, genreCounts, genreDiversity, loyalty } from '../lib/stats'
 import StatCard from './StatCard'
 import { availableStats } from '../lib/stats'
+import GenreChart from './genreChart'
+import DecadeChart from './decadeChart'
+import PersonalityCard from './PersonalityCard'
+import { getPersonality } from '../lib/personalities'
 
 
 export default function Dashboard() {
@@ -37,9 +41,19 @@ export default function Dashboard() {
 
       {status === 'done' && (
         <div>
+            <PersonalityCard
+                personality={getPersonality({
+                diversity: genreDiversity(artists),
+                averageYear: averageReleaseYear(tracks),
+                loyalty: loyalty(tracks),
+                decadeCount: byDecade(tracks).length,
+                artistCount: artists.length,
+                })}
+            />
+        
             {availableStats(false).map(function (stat) {
             const result = stat.compute({ artists, tracks, olderArtists: [] })
-            return (
+            return (                
                 <StatCard
                 key={stat.id}
                 label={stat.label}
@@ -50,6 +64,8 @@ export default function Dashboard() {
             })}
           <ArtistList artists={artists} />
           <TrackList tracks={tracks} />
+          <GenreChart artists={artists} />
+          <DecadeChart tracks={tracks} />
         </div>
       )}
     </div>
